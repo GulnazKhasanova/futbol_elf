@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return 'Список футболистов';
+        return view('admin.categorys.index');
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return 'Изменить список футболистов';
+        return view('admin.categorys.create');
     }
 
     /**
@@ -35,7 +35,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'patronymic'=> ['required', 'string', 'min:5']
+        ]);
+//        dd($request->only('surname', 'role'));
+//        dd($request->input('surname', 'some wrong'));
+//        dd($request->fullUrl());
+//        dd($request->query('q', '0')); // = dd($request->qet('q', '0'));
+        return response()->json($request->all());
     }
 
     /**

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\LogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,6 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::group(['as'=>'admin.', 'prefix'=>'admin'], function(){
+    Route::view('/', 'admin.index')->name('index');
     Route::resource('/category', AdminCategoryController::class);
     Route::resource('/news', AdminNewsController::class);
 });
@@ -29,3 +31,6 @@ Route::get('/news', [NewsController::class, 'index'])
 Route::get('/news/action/{id}', [NewsController::class, 'show'])
     ->where('id', '\d+')
     ->name('news.show');
+Route::get('addLog',[LogController::class, 'myTestAddToLog']);
+Route::get('logActivity',[LogController::class, 'logActivity']);
+
