@@ -18,9 +18,24 @@ class CreateLogActivityTable extends Migration
             $table->string('subject');
             $table->string('method');
             $table->ipAddress('ip');
-            $table->integer('user_id');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('news')
+                ->cascadeOnDelete();
+
             $table->string('session_id');
-            $table->integer('to_user_id');
+            $table->foreign('session_id')
+                ->references('id')
+                ->on('sessions');
+
+            $table->unsignedBigInteger('to_user_id');
+            $table->foreign('to_user_id')
+                ->references('id')
+                ->on('news')
+                ->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

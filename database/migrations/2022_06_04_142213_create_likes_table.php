@@ -14,12 +14,27 @@ class CreateLikesTable extends Migration
     public function up()
     {
         Schema::create('likes', function (Blueprint $table) {
-            $table->id();
-            $table->integer('id_from_gamer')->index();
-            $table->integer('id_to_gamer')->index();
-            $table->boolean('ball')->nullable();
-            $table->integer('id_vote')->index();
-            $table->timestamps();
+           $table->unsignedBigInteger('id_from_gamer');
+           $table->foreign('id_from_gamer')
+               ->references('id')
+               ->on('news')
+               ->cascadeOnDelete();
+
+           $table->unsignedBigInteger('id_to_gamer');
+           $table->foreign('id_to_gamer')
+                ->references('id')
+                ->on('news')
+                ->cascadeOnDelete();
+
+           $table->boolean('ball')->nullable();
+
+           $table->unsignedBigInteger('id_vote');
+           $table->foreign('id_vote')
+                ->references('id')
+                ->on('vote')
+                ->cascadeOnDelete();
+
+           $table->timestamps();
         });
     }
 

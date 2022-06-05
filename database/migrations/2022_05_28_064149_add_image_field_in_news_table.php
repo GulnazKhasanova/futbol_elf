@@ -16,7 +16,7 @@ class AddImageFieldInNewsTable extends Migration
         Schema::table('news', function (Blueprint $table) {
             $table->string('image',255)->nullable()->after('role_id');
 
-            $table->index(['status','id']);
+            $table->index('status');
         });
     }
 
