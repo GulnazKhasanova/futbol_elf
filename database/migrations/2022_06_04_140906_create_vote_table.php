@@ -14,9 +14,9 @@ class CreateVoteTable extends Migration
     public function up()
     {
         Schema::create('vote', function (Blueprint $table) {
-            $table->increments('id')->primary();
-            $table->timestamps('time_start');
-            $table->timestamps('time_finish');
+            $table->id();
+            $table->integer('vote');
+            $table->timestamps();
         });
     }
 

@@ -17,7 +17,7 @@ class CreateLogActivityTable extends Migration
             $table->increments('id');
             $table->string('subject');
             $table->string('method');
-            $table->string('ip');
+            $table->ipAddress('ip');
             $table->integer('user_id');
             $table->string('session_id');
             $table->integer('to_user_id');
