@@ -8,25 +8,25 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link @if(request()->routeIs('admin.category.*')) active @endif" href="{{ route('admin.category.index') }}">
+                <a class="nav-link @if(request()->routeIs('admin.news.*')) active @endif" href="{{ route('admin.news.index') }}">
                     <span data-feather="file"></span>
                     Список игроков
                 </a>
             </li>
+{{--            <li class="nav-item">--}}
+{{--                <a class="nav-link" href="#">--}}
+{{--                    <span data-feather="file"></span>--}}
+{{--                    Список пользователей--}}
+{{--                </a>--}}
+{{--            </li>--}}
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file"></span>
-                    Список пользователей
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" @if(request()->routeIs('admin.vote.*')) active @endif" href="{{ route('admin.vote.index') }}">
                     <span data-feather="users"></span>
                     Голосования
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" @if(request()->routeIs('admin.logs.*')) active @endif" href="{{ route('admin.logs.index') }}">
                     <span data-feather="layers"></span>
                     Логи
                 </a>

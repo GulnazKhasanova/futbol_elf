@@ -5,6 +5,7 @@
     <title>админ - футбольного сайта - ЕЛФ</title>
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href=" {{mix ('css/app.css')}}">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;

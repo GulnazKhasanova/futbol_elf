@@ -13,39 +13,43 @@
 @section('content')
     <div class="container">
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            @forelse ($newsList as $news)
-            <div class="col">
-                <div class="card shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        @forelse($newsList as $news)
+               <div class="col">
+                   <div class="card shadow-sm">
+                       @if(!$news->image)
+                       <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Фото</text></svg>
+                       @else
+                           <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="{{asset('public/storage/'.$news->image)}}" focusable="false">
+                       @endif
+                       <div class="card-body">
+                           <p>
+                               <strong>
+                                   <a href="{{ route('news.show', ['news' => $news]) }}">
+                                       {{ $news->title }}
+                                   </a>
+                               </strong>
+                           </p>
+                           <p>Автор:{{ $news->author }}</p>
+                           <p class="card-text">
+                               {!! $news->description !!}
+                           </p>
+                           <div class="d-flex justify-content-between align-items-center">
+                               <div class="btn-group">
+                                   <a href="{{ route('news.show', ['news' => $news]) }}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                               </div>
+                               <small class="text-muted"> Дата: {{ $news->created_at }}</small>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+               @empty
+       <h2>Записей нет</h2>
+      @endforelse
 
-                    <div class="card-body">
-                        <p>
-                            <strong>
-                                <a href="{{ route('news.show', ['id' => $news->id]) }}">
-                                    {{$news->title }}
-                                </a>
-                            </strong>
-                        </p>
-                        <p>Автор:{{ $news->author }}</p>
-                        <p class="card-text">
-                            {!! $news->description !!}
-                        </p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <a href="{{ route('news.show', ['id' => $news->id]) }}" class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                            </div>
-                            <small class="text-muted"> Дата: {{ $news->created_at }}</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @empty
-                <h2>Записей нет</h2>
-            @endforelse
-        </div>
     </div>
-    <hr>
+</div>
+<hr>
 
-    @endsection
+@endsection
 

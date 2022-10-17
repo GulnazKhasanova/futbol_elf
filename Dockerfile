@@ -6,6 +6,21 @@ RUN mkdir -p /home/testuser/.composer && \
 RUN apt-get update --fix-missing -q
 RUN apt-get install -y curl mcrypt gnupg build-essential software-properties-common wget vim zip unzip
 RUN docker-php-ext-install pdo pdo_mysql
+ENV NVM_VERSION v0.33.11
+ENV NODE_VERSION v7.5.0
+ENV NVM_DIR /home/testuser/nvm
+RUN mkdir $NVM_DIR
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+RUN echo "source $NVM_DIR/nvm.sh && \
+    nvm install $NODE_VERSION && \
+     nvm install --lts --latest-npm" | bash
+RUN ln -sf $NVM_DIR/versions/node/v$NODE_VERSION/bin/node /usr/bin/nodejs
+RUN ln -sf $NVM_DIR/versions/node/v$NODE_VERSION/bin/npm /usr/bin/npm
+
 RUN curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public/
 ENV APACHE_LOG_DIR /var/log/apache2

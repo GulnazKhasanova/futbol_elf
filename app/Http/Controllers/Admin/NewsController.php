@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\LogActivity;
 use App\Http\Controllers\Controller;
+use App\Models\News;
+use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
@@ -14,7 +18,11 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('admin.news.index');
+        $news = News::paginate(2);
+
+        return view('admin.news.index', [
+            'newsList' => $news
+        ]);
     }
 
     /**
@@ -24,7 +32,15 @@ class NewsController extends Controller
      */
     public function create()
     {
-       return 'Добавить запись об игроке';
+        $news = News::select(News::$availableFields)->get();
+        $role = Role::all();
+        $logs = LogActivity::all();
+
+       return view('admin.news.create',[
+           'news' => $news,
+           'role' => $role,
+           'logs' => $logs
+       ]);
     }
 
     /**
@@ -35,16 +51,49 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $path = '';
+        if($request->hasFile('image')) {
+//            $image = $request->file('image');
+            $path = $request->file('image')->store('avatars/', 'public');
+        }
+
+        $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description', 'birthday', 'enter_club_date', 'admin',
+            'status',
+            'role_id']) + ['image'=>$path];
+
+
+        $created = News::create($data);
+
+        $createdId = $created->id;
+        $userIp = $request->ip();
+        $sessionId = $request->session()->getId();
+
+
+        if($created){
+
+            LogActivity::create(['id',
+                'subject' => 'player',
+                'method'  => 'created',
+                'ip'      => $userIp,
+                'user_id' => 1, /*auth()->user()->id,*/
+                'session_id' => $sessionId,
+                'to_user_id' => $createdId
+            ]);
+
+            return redirect()->route('admin.news.index')
+                ->with('success', 'Запись успешно добавлена');
+        }
+        return back()->with('error', 'Не удалось добавить запись')
+            ->withInput();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param News $news
+     * @return void
      */
-    public function show($id)
+    public function show(News $news)
     {
         //
     }
@@ -52,34 +101,81 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param News $news
+     * @return void
      */
-    public function edit($id)
+    public function edit(News $news)
     {
-        //
+        $role = Role::all();
+
+        return view('admin.news.edit',[
+            'news' => $news,
+            'role' => $role
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param News $news
+     * @return void
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, News $news)
     {
-        //
+        $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description', 'birthday', 'enter_club_date', 'admin',
+            'status',
+            'role_id']);
+
+        $updated = $news->fill($data)->save();
+        $updatedId = $news->id;
+        $userIp = $request->ip();
+        $sessionId = $request->session()->getId();
+
+        if($updated){
+            LogActivity::create(['id',
+                'subject' => 'player',
+                'method'  => 'update',
+                'ip'      => $userIp,
+                'user_id' => 1, /*auth()->user()->id,*/
+                'session_id' => $sessionId,
+                'to_user_id' => $updatedId
+            ]);
+
+            return redirect()->route('admin.news.index')
+                ->with('success', 'Запись успешно обновлена');
+        }
+        return back()->with('error', 'Не удалось обновить запись')
+            ->withInput();
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param News $news
+     * @return void
      */
-    public function destroy($id)
+    public function destroy(Request $request, News $news)
     {
-        //
+        $news->delete();
+        $deletedId = $news->id;
+        $userIp = $request->ip();
+        $sessionId = $request->session()->getId();
+
+        if($news){
+            LogActivity::create(['id',
+                'subject' => 'player',
+                'method'  => 'delete',
+                'ip'      => $userIp,
+                'user_id' => auth()->user()->id,
+                'session_id' => $sessionId,
+                'to_user_id' => $deletedId
+            ]);
+            return redirect()->route('admin.news.index')
+                ->with('success', 'Запись успешно удалена');
+        }
+        return redirect()->route('admin.news.index')
+            ->with('error', 'Не удалось удалить запись')
+            ->withInput();
     }
 }

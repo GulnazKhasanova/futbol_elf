@@ -12,12 +12,12 @@ class CreateLogActivityTable extends Migration
      * @return void
      */
     public function up()
-    {
+    { if(!Schema::hasTable('log_activity')){
         Schema::create('log_activity', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('subject');
-            $table->string('method');
-            $table->ipAddress('ip');
+            $table->string('subject',120)->default('') ;
+            $table->string('method', 50)->default('');
+            $table->ipAddress('ip')->nullable(false);
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
@@ -25,10 +25,12 @@ class CreateLogActivityTable extends Migration
                 ->on('news')
                 ->cascadeOnDelete();
 
-            $table->string('session_id');
-            $table->foreign('session_id')
-                ->references('id')
-                ->on('sessions');
+            $table->string('session_id')->nullable(false);
+//            $table->foreign('session_id')
+//                ->references('id')
+//                ->on('sessions')
+//                ->onUpdate('cascade')
+//                ->onDelete('cascade');
 
             $table->unsignedBigInteger('to_user_id');
             $table->foreign('to_user_id')
@@ -37,7 +39,7 @@ class CreateLogActivityTable extends Migration
                 ->cascadeOnDelete();
 
             $table->timestamps();
-        });
+        });}
     }
 
     /**

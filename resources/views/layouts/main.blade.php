@@ -5,6 +5,7 @@
     <title>@section('title') Футбольный клуб - ЕЛФ @show </title>
       <!-- Bootstrap core CSS -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
    <style>
       .bd-placeholder-img {
     font-size: 1.125rem;

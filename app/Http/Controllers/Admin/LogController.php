@@ -1,14 +1,27 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;;
 
+
+use App\Http\Controllers\Controller;
+use App\Models\LogActivity;
 use Illuminate\Http\Request;
-use App\Helpers\LogActivity;
 
 class LogController extends Controller
 {
+    /**
+     * @return \Illuminate\Http\Response
+     */
+
      public function index()
      {
+         $logs= LogActivity::paginate(15);
+
+         return view('admin.logs.index', [
+             'logsList' => $logs
+         ]);
+
+//         return view('admin.logs.index');
      }
 
      public function myTestAddToLog(){

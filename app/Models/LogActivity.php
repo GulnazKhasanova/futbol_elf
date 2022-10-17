@@ -16,9 +16,12 @@ class LogActivity extends Model
      * @var array
 
      */
+    protected  $table= 'log_activity';
+    public static  $availableFields= ['subject','method', 'ip', 'user_id', 'to_user_id', 'session_id'];
     protected $fillable = [
         'subject','method', 'ip', 'user_id', 'to_user_id', 'session_id'
         ];
+
 
     use HasFactory;
 }
