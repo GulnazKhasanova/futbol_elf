@@ -28,8 +28,7 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function() {
-Route::get('/account', AccountController::class)
-    ->name('account');
+Route::resource('/account', AccountController::class);
 
 Route::get('/logaut', function() {
     Auth::logout();

@@ -43,4 +43,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'is_admin'          => 'boolean'
     ];
+
+
+    public function news()
+    {
+        return $this->hasOne(News::class);
+    }
 }

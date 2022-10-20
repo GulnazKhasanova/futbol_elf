@@ -126,9 +126,9 @@ class VoteController extends Controller
                 'to_user_id' => $updatedId
             ]);
             return redirect()->route('admin.vote.index')
-                ->with('success', 'Запись успешно обновлена');
+                ->with('success', 'Вы успешно проголосовали');
         }
-        return back()->with('error', 'Не удалось обновить запись')
+        return back()->with('error', 'Не удалось проголосовать')
             ->withInput();
     }
 

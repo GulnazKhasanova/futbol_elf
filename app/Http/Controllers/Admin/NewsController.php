@@ -16,6 +16,7 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         $news = News::paginate(2);
@@ -56,7 +57,6 @@ class NewsController extends Controller
 //            $image = $request->file('image');
             $path = $request->file('image')->store('avatars/', 'public');
         }
-
         $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description', 'birthday', 'enter_club_date', 'admin',
             'status',
             'role_id']) + ['image'=>$path];
@@ -95,7 +95,10 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        //
+
+        return view('admin.news.show', [
+            'news' => $news
+        ]);
     }
 
     /**
@@ -106,12 +109,12 @@ class NewsController extends Controller
      */
     public function edit(News $news)
     {
-        $role = Role::all();
-
-        return view('admin.news.edit',[
-            'news' => $news,
-            'role' => $role
-        ]);
+//        $role = Role::all();
+//
+//        return view('admin.news.edit',[
+//            'news' => $news,
+//            'role' => $role
+//        ]);
     }
 
     /**
@@ -123,30 +126,30 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description', 'birthday', 'enter_club_date', 'admin',
-            'status',
-            'role_id']);
-
-        $updated = $news->fill($data)->save();
-        $updatedId = $news->id;
-        $userIp = $request->ip();
-        $sessionId = $request->session()->getId();
-
-        if($updated){
-            LogActivity::create(['id',
-                'subject' => 'player',
-                'method'  => 'update',
-                'ip'      => $userIp,
-                'user_id' => 1, /*auth()->user()->id,*/
-                'session_id' => $sessionId,
-                'to_user_id' => $updatedId
-            ]);
-
-            return redirect()->route('admin.news.index')
-                ->with('success', 'Запись успешно обновлена');
-        }
-        return back()->with('error', 'Не удалось обновить запись')
-            ->withInput();
+//        $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description', 'birthday', 'enter_club_date', 'admin',
+//            'status',
+//            'role_id']);
+//
+//        $updated = $news->fill($data)->save();
+//        $updatedId = $news->id;
+//        $userIp = $request->ip();
+//        $sessionId = $request->session()->getId();
+//
+//        if($updated){
+//            LogActivity::create(['id',
+//                'subject' => 'player',
+//                'method'  => 'update',
+//                'ip'      => $userIp,
+//                'user_id' => 1, /*auth()->user()->id,*/
+//                'session_id' => $sessionId,
+//                'to_user_id' => $updatedId
+//            ]);
+//
+//            return redirect()->route('admin.news.index')
+//                ->with('success', 'Запись успешно обновлена');
+//        }
+//        return back()->with('error', 'Не удалось обновить запись')
+//            ->withInput();
     }
 
     /**
