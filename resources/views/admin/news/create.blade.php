@@ -50,7 +50,7 @@
             </div>
                 @endforeach
         <div class="form-group">
-            <label for="image">Загрузить файл</label>
+            <label for="image">Загрузить фото</label>
             <input type="file" class="form-control" id="image" name="image" required >
         </div>
 

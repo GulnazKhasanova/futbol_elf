@@ -47,20 +47,7 @@ Route::group(['as'=>'admin.', 'prefix'=>'admin', 'middleware' => 'admin'], funct
         ->name('logs.index');
 });
 });
-
-Route::get('/news', [NewsController::class, 'index'])
-    ->name('news.index');
-Route::get('/news/action/{news}', [NewsController::class, 'show'])
-    ->where('news', '\d+')
-    ->name('news.show');
-Route::get('/news/{news}/edit', [NewsController::class, 'edit'])
-    ->where('news', '\d+')
-    ->name('news.edit');
-Route::get('/news/action/{news}', [NewsController::class, 'update'])
-    ->where('news', '\d+')
-    ->name('news.update');
-Route::get('/news/create', [NewsController::class, 'create'])
-    ->name('news.create');
+Route::resource('/news', NewsController::class);
 
 Route::get('/vote', [VoteController::class, 'index'])
     ->name('vote.index');

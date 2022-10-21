@@ -70,13 +70,18 @@ class NewsController extends Controller
                 'to_user_id' => $createdId
             ]);
 
-            return redirect()->route('account.index')
+            return redirect()->route('account')
                 ->with('success', 'Запись успешно добавлена');
         }
         return back()->with('error', 'Не удалось добавить запись')
             ->withInput();
     }
-
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param News $news
+     * @return void
+     */
         public function show(News $news)
     {
         return view('news.show', [
@@ -134,7 +139,7 @@ class NewsController extends Controller
                 'to_user_id' => $updatedId
             ]);
 
-            return redirect()->route('account.index')
+            return redirect()->route('account')
                 ->with('success', 'Запись успешно обновлена');
         }
         return back()->with('error', 'Не удалось обновить запись')

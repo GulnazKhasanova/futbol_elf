@@ -46,7 +46,7 @@
                                 </div>
                             @endforeach
                             <div class="form-group col-md-12">
-                                <label for="image">Загрузить файл</label>
+                                <label for="image">Загрузить фото</label>
                                 <input type="file" class="form-control" id="image" name="image" required >
                             </div>
                             <div class="col-md-12"><label class="labels">Дата вступления в клуб</label><input type="date" class="form-control" id="enter_club_date " name="enter_club_date" value="{{ old('enter_club_date') }}"></div>

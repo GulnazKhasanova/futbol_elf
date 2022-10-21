@@ -14,7 +14,7 @@
 
     <form action="{{ route('news.update', $news) }}" method="post">
         @csrf
-        @method('put')
+        @method('get')
         <div class="container rounded bg-white mt-5 mb-5">
             <div class="row">
                 <div class="col-md-3 border-right">
@@ -45,6 +45,10 @@
                             {{--                    @foreach($role as $el)--}}
                             {{--                    <div class="col-md-12 form-check"><label class="form-check-label" for="role_id">{{ $el->role }}</label><input class="form-check-input" type="radio" class="" id="role_id" name="role_id" @if($news->role_id === $el->id) value="{{ $news->role_id }}" checked @else value="{{ $el->id }}"  @endif  ></div>--}}
                             {{--                    @endforeach--}}
+                            <div class="form-group col-md-12">
+                                <label for="image">Загрузить фото</label>
+                                <input type="file" class="form-control" id="image" name="image" required >
+                            </div>
                             <div class="col-md-12"><label class="labels">Дата вступления в клуб</label><input type="date" class="form-control" id="enter_club_date " name="enter_club_date" value="{{ \Carbon\Carbon::parse($news->enter_club_date)->format('Y-m-d') }}"></div>
                             <div class="col-md-12"><label class="labels" for="status">Статус в голосовании</label>
                                 <input type="text" disabled class="form-control" value="Active">
