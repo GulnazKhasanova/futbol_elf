@@ -4,16 +4,16 @@
 @endsection
 @section('header')
     <h1 class="h2">Страница игрока</h1>
-    <h2>{{ AUth::user()->name }}, добро пожаловать на сайт ELF</h2>
+    <h2>{{ Auth::user()->name }}, добро пожаловать на сайт ELF</h2>
     <nav class="nav">
     @if(Auth::user()->is_admin)
         <a class="nav-link" href="{{ route('admin.index') }}" >В админку</a>
     @endif
     @if($news)
-@dd($news)
-        <a class="nav-link" href="{{ route('account.edit', $news ) }}" >Редактировать профиль</a>
+
+        <a class="nav-link" href="{{ route('news.edit', $news ) }}" >Редактировать профиль</a>
     @else
-        <a class="nav-link" href="{{ route('account.create') }}" >Создать профиль</a>
+        <a class="nav-link" href="{{ route('news.create') }}" >Создать профиль</a>
     @endif
         <a class="nav-link" href="{{ route('account.logout') }}" >Выход</a>
     </nav>

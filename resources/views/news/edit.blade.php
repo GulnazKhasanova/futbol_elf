@@ -11,9 +11,8 @@
 @endsection
 @section('content')
     @include('inc.message')
-    @dd($news)
-{{--    @dd(\App\Models\News::where('user_id', Auth::user()->id)->get() )--}}
-    <form action="{{ route('account.update', $news) }}" method="post">
+
+    <form action="{{ route('news.update', $news) }}" method="post">
         @csrf
         @method('put')
         <div class="container rounded bg-white mt-5 mb-5">

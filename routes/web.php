@@ -28,7 +28,8 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function() {
-Route::resource('/account', AccountController::class);
+    Route::get('/account', AccountController::class)
+        ->name('account');
 
 Route::get('/logaut', function() {
     Auth::logout();
@@ -52,6 +53,14 @@ Route::get('/news', [NewsController::class, 'index'])
 Route::get('/news/action/{news}', [NewsController::class, 'show'])
     ->where('news', '\d+')
     ->name('news.show');
+Route::get('/news/{news}/edit', [NewsController::class, 'edit'])
+    ->where('news', '\d+')
+    ->name('news.edit');
+Route::get('/news/action/{news}', [NewsController::class, 'update'])
+    ->where('news', '\d+')
+    ->name('news.update');
+Route::get('/news/create', [NewsController::class, 'create'])
+    ->name('news.create');
 
 Route::get('/vote', [VoteController::class, 'index'])
     ->name('vote.index');

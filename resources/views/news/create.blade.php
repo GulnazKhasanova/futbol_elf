@@ -11,7 +11,7 @@
 @endsection
 @section('content')
     @include('inc.message')
-    <form action="{{ route('account.store') }}" method="post" enctype="multipart/form-data>
+    <form action="{{ route('news.store') }}" method="post" enctype="multipart/form-data>
         @csrf
         @method('put')
         <div class="container rounded bg-white mt-5 mb-5">
