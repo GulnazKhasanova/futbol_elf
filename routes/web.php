@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RoleController as AdminRoleController;
 use App\Http\Controllers\Admin\LogController as AdminLogController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\TopchartController;
+use App\Http\Controllers\Ajax\VotingController as AjaxVotingController;
 
 
 /*
@@ -61,7 +62,7 @@ Route::get('/topchart/action/{topchart}', [TopchartController::class, 'show'])
     ->where('topchart', '\d+')
     ->name('topchart.show');
 
-
+Route::get('/voting/{idNews}', [AjaxVotingController::class, 'vote']);
 //Route::get('addLog',[LogController::class, 'myTestAddToLog']);
 //Route::get('logActivity',[LogController::class, 'logActivity']);
 

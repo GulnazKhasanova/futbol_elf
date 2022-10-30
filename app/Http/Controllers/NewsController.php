@@ -114,7 +114,9 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        $path = '';
+
+        $path = $news->getAttribute('image');
+
         if($request->hasFile('image')) {
 //            $image = $request->file('image');
             $path = $request->file('image')->store('avatars/', 'public');
@@ -122,7 +124,7 @@ class NewsController extends Controller
 
         $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description', 'birthday', 'enter_club_date', 'admin',
                 'status',
-                'role_id']) + ['image'=>$path];
+                'role_id']) + ['image' => $path];
 
         $updated = $news->fill($data)->save();
         $updatedId = $news->id;

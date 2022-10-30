@@ -51,7 +51,7 @@ class VoteController extends Controller
      */
     public function store(Request $request)
     {
-        $data =  $request->only(['name_vote','date_start','date_finish', 'created_at', 'updated_at']);
+        $data =  $request->only(['name_vote','date_start','date_finish', 'created_at', 'updated_at', 'counter']);
 
         $created = Vote::create($data);
         $createdId = $created->id;
@@ -110,7 +110,7 @@ class VoteController extends Controller
      */
     public function update(Request $request, Vote $vote)
     {
-        $data = $request->only(['name_vote','date_start','date_finish', 'created_at', 'updated_at']);
+        $data = $request->only(['name_vote','date_start','date_finish', 'created_at', 'updated_at', 'counter']);
 
         $updated = $vote->fill($data)->save();
         $updatedId = $vote->id;
@@ -126,9 +126,9 @@ class VoteController extends Controller
                 'to_user_id' => $updatedId
             ]);
             return redirect()->route('admin.vote.index')
-                ->with('success', 'Вы успешно проголосовали');
+                ->with('success', 'Вы успешно изменили голосование');
         }
-        return back()->with('error', 'Не удалось проголосовать')
+        return back()->with('error', 'Не удалось изменить госование')
             ->withInput();
     }
 

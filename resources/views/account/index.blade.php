@@ -56,12 +56,12 @@
             </div>
         </div>
     </section>
-{{--    <form action="{{ route('vote.show', [ 'news' => $news]) }}" method="post">--}}
-{{--        @csrf--}}
-{{--        @method('put')--}}
+    <form id="votingform" method="post">
+        @csrf
+        @method('get')
+        <input type="hidden" id="{{$news->id}}"  >
+        <button @if(count($arrCount)>10) disabled @endif class="btn btn-success" id="vote" type="submit" style="float: right">Голосовать</button>
+    </form>
 
-{{--        <button class="btn btn-success" type="submit" style="float: right">Голосовать</button>--}}
-
-{{--    </form>--}}
 
 @endsection
