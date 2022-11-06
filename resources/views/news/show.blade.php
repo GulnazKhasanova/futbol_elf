@@ -25,11 +25,11 @@
                                 <div class="col-md-6">
                                     <div class="media">
                                         <label>E-mail</label>
-                                        <p>info@domain.com</p>
+                                        <p>{{$news->email}}</p>
                                     </div>
                                     <div class="media">
                                         <label>Phone</label>
-                                        <p>820-885-3321</p>
+                                        <p>{{$news->phone}}</p>
                                     </div>
                                 </div>
                             </div>

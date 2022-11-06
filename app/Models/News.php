@@ -10,7 +10,7 @@ class News extends Model
 {
 
     protected  $table= 'news';
-    public static  $availableFields= ['id', 'firstname', 'lastname', 'patronymic','phone','login', 'password', 'description', 'birthday', 'role_id', 'image' ,'enter_club_date', 'admin', 'status', 'created_at' ];
+    public static  $availableFields= ['id', 'firstname', 'lastname', 'patronymic','phone','login', 'password', 'description', 'birthday', 'role_id', 'image' ,'enter_club_date', 'admin', 'status', 'created_at', 'user_id' ];
     protected $fillable = [ 'firstname',
         'lastname',
         'patronymic',
@@ -23,7 +23,8 @@ class News extends Model
         'image',
         'enter_club_date',
         'admin',
-        'status'];
+        'status',
+        'user_id'];
 
 
     use HasFactory;

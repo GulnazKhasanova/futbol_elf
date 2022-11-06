@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/account', AccountController::class)
         ->name('account');
 
-Route::get('/logaut', function() {
+Route::get('/logout', function() {
     Auth::logout();
     return redirect()->route('login');
 })->name('account.logout');
@@ -62,7 +62,7 @@ Route::get('/topchart/action/{topchart}', [TopchartController::class, 'show'])
     ->where('topchart', '\d+')
     ->name('topchart.show');
 
-Route::get('/voting/{idNews}', [AjaxVotingController::class, 'vote']);
+Route::get('/voting/{id}', [AjaxVotingController::class, 'vote']);
 //Route::get('addLog',[LogController::class, 'myTestAddToLog']);
 //Route::get('logActivity',[LogController::class, 'logActivity']);
 

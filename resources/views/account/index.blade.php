@@ -24,7 +24,7 @@
 @endsection
 @section('content')
     @include('inc.message')
-
+    @if($news)
     <section class="section about-section gray-bg" id="about">
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
@@ -56,12 +56,14 @@
             </div>
         </div>
     </section>
-    <form id="votingform" method="post">
+    <form id="votingform" method="get">
         @csrf
-        @method('get')
-        <input type="hidden" id="{{$news->id}}"  >
+        @method('post')
+        <input type="hidden" name="id" id="{{$news->id}}"  >
         <button @if(count($arrCount)>10) disabled @endif class="btn btn-success" id="vote" type="submit" style="float: right">Голосовать</button>
     </form>
-
+    @else
+        <h2>Профиль не заполнен</h2>
+    @endif
 
 @endsection

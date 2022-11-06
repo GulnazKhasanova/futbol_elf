@@ -6,7 +6,9 @@ use App\Models\LogActivity;
 use App\Http\Controllers\Controller;
 use App\Models\News;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
@@ -57,9 +59,9 @@ class NewsController extends Controller
 //            $image = $request->file('image');
             $path = $request->file('image')->store('avatars/', 'public');
         }
-        $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description', 'birthday', 'enter_club_date', 'admin',
-            'status',
-            'role_id']) + ['image'=>$path];
+        $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description',
+            'birthday', 'enter_club_date', 'admin', 'status', 'role_id'])
+            + ['image'=>$path] + ['user_id' => ''];
 
 
         $created = News::create($data);

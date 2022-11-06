@@ -19,6 +19,11 @@ class NewsController extends Controller
            'newsList' => $news
        ]);
    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
 
     public function create()
@@ -47,9 +52,9 @@ class NewsController extends Controller
 //            $image = $request->file('image');
             $path = $request->file('image')->store('avatars/', 'public');
         }
-        $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description', 'birthday', 'enter_club_date', 'admin',
-                'status',
-                'role_id']) + ['image'=>$path];
+        $data = $request->only(['firstname','lastname','patronymic','phone','login','password','description',
+                'birthday', 'enter_club_date', 'admin', 'status', 'role_id'])
+                + ['image'=>$path] + ['user_id' => Auth::user()->id];
 
 
         $created = News::create($data);
