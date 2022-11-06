@@ -11,10 +11,9 @@
 @endsection
 @section('content')
     @include('inc.message')
-    <form action="{{ route('news.store') }}" method="post" enctype="multipart/form-data>
+    <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data>
         @csrf
-        @method('put')
-        <div class="container rounded bg-white mt-5 mb-5">
+{{--        <div class="container rounded bg-white mt-5 mb-5">--}}
             <div class="row">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -58,7 +57,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+{{--        </div>--}}
     </form>
 @endsection
 

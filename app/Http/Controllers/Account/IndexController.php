@@ -20,14 +20,18 @@ class IndexController extends Controller
     public function __invoke(Request $request)
     {
         $user = Auth::user()->id;
-        $news = News::findOrFail(Auth::user()->news_id);
-        if ($news){
+
+        if (Auth::user()->news_id){
+            $news = News::findOrFail(Auth::user()->news_id);
             return view('account.index', [
                 'user'     => User::findOrFail($user),
                 'news'     =>$news
             ]);
         } else {
-            return view('account.index');
+            $news = '';
+            return view('account.index', [
+                'news'     =>$news
+            ]);
         }
 
 //        return view('account.index');
