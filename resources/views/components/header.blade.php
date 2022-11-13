@@ -9,8 +9,12 @@
                 <div class="col-sm-4 offset-md-1 py-4">
                     <h4 class="text-white">Контакты</h4>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-white">Like on Vkontakte</a></li>
-                        <li><a href="#" class="text-white">Email</a></li>
+                        <li><a href="https://vk.com/club_elf2008" class="text-white">Like on Vkontakte</a></li>
+                        @if(Auth::check())
+                        <li><a class="text-white" href="{{ route('account.logout') }}">Выход</a></li>
+                        @else
+                        <li><a class="text-white" href="{{ route('login') }}">Вход</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>

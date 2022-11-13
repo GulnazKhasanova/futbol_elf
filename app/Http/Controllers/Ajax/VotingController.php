@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ajax;
 use App\Events\VoteClose;
 use App\Http\Controllers\Controller;
 use App\Models\LogActivity;
+use App\Models\Topchart;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;
@@ -51,7 +52,7 @@ class VotingController extends Controller
                    }
                }
            }
-           if ($vot == 10) {
+           if ($vot === 10) {
                DB::table('vote')
                    ->whereNull('date_finish')
                    ->update(['date_finish' => date("Y-m-d H:i:s")]);
@@ -65,4 +66,25 @@ class VotingController extends Controller
        }
 
    }
+    public function checkVote(Request $request, int $id){
+
+        $vote = DB::table('vote')
+            ->whereNull('date_finish')
+            ->first();
+        if ($vote){
+            $counter = $vote->counter;
+            $tr = trim($counter);
+            $vot = count(explode(" ",$tr));
+            if($id) {
+                if (str_contains($counter, $id) !== true){
+                    return response()->json($counter);
+                } else {
+                    return response()->json('no');
+                }
+            }
+        } else {
+            return response()->json('close');
+        }
+
+    }
 }

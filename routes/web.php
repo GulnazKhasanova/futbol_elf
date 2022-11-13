@@ -49,6 +49,8 @@ Route::group(['as'=>'admin.', 'prefix'=>'admin', 'middleware' => 'admin'], funct
 });
 });
 Route::resource('/news', NewsController::class);
+Route::get('/news', [NewsController::class, 'index'])
+    ->name('news.index');
 
 Route::get('/vote', [VoteController::class, 'index'])
     ->name('vote.index');
@@ -63,6 +65,7 @@ Route::get('/topchart/action/{topchart}', [TopchartController::class, 'show'])
     ->name('topchart.show');
 
 Route::get('/voting/{id}', [AjaxVotingController::class, 'vote']);
+Route::get('/check/{id}', [AjaxVotingController::class, 'checkVote']);
 //Route::get('addLog',[LogController::class, 'myTestAddToLog']);
 //Route::get('logActivity',[LogController::class, 'logActivity']);
 
