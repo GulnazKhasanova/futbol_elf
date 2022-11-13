@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
@@ -47,6 +48,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+
         $path = '';
         if($request->hasFile('image')) {
 //            $image = $request->file('image');
@@ -62,7 +64,9 @@ class NewsController extends Controller
         $createdId = $created->id;
         $userIp = $request->ip();
         $sessionId = $request->session()->getId();
-
+        DB::table('users')
+            ->where(['id' => Auth::user()->id])
+            ->update(['news_id' => $createdId]);
 
         if($created){
 
@@ -76,7 +80,7 @@ class NewsController extends Controller
             ]);
 
             return redirect()->route('account')
-                ->with('success', 'Запись успешно добавлена');
+                ->with('success', 'Запись успешно добавлна');
         }
         return back()->with('error', 'Не удалось добавить запись')
             ->withInput();

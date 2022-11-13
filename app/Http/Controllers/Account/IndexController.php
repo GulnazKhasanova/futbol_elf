@@ -19,18 +19,34 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request)
     {
+        $arrCount = [];
+
+        $vote = Vote::where('date_finish', '=', null)->first();
+//        dd($vote);
+        if($vote){
+            $counter = $vote->counter;
+            if ($counter) {
+                $arrCount = explode(",",$counter);
+            }
+            else {
+                $arrCount = [];
+            }
+        }
+
         $user = Auth::user()->id;
 
         if (Auth::user()->news_id){
             $news = News::findOrFail(Auth::user()->news_id);
             return view('account.index', [
                 'user'     => User::findOrFail($user),
-                'news'     =>$news
+                'news'     =>$news,
+                'arrCount' => $arrCount
             ]);
         } else {
             $news = '';
             return view('account.index', [
-                'news'     =>$news
+                'news'     =>$news,
+                'arrCount' => $arrCount
             ]);
         }
 

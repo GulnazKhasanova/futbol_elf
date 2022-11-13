@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Ajax;
 
+use App\Events\VoteClose;
 use App\Http\Controllers\Controller;
 use App\Models\LogActivity;
 use App\Models\Vote;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\DB;
 
 class VotingController extends Controller
@@ -53,6 +55,7 @@ class VotingController extends Controller
                DB::table('vote')
                    ->whereNull('date_finish')
                    ->update(['date_finish' => date("Y-m-d H:i:s")]);
+               broadcast( new VoteClose($vot));
                return response()->json('off');
            }
 

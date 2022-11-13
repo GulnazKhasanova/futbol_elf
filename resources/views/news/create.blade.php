@@ -11,9 +11,9 @@
 @endsection
 @section('content')
     @include('inc.message')
-    <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data>
+    <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-{{--        <div class="container rounded bg-white mt-5 mb-5">--}}
+      <div class="container rounded bg-white mt-5 mb-5">
             <div class="row">
                 <div class="col-md-3 border-right">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -53,11 +53,11 @@
                                 <input type="text" disabled class="form-control" value="Active">
                             </div>
                         </div>
-                        <div class="mt-5 text-center"><button class="btn btn-success" type="submit" style="float: right">Сохранить</button></div>
                     </div>
                 </div>
             </div>
-{{--        </div>--}}
+    <div class="mt-5 text-center"><button class="btn btn-success" type="submit" style="float: right">Сохранить</button></div>
+        </div>
     </form>
 @endsection
 
