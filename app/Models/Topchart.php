@@ -25,4 +25,12 @@ class Topchart extends Model
     ];
 
     use HasFactory;
+
+    public function vote(){
+        return $this->belongsToMany(Vote::class);
+    }
+
+    public function user(){
+        return $this->belongsToMany(User::class);
+    }
 }

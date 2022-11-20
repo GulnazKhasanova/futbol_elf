@@ -17,4 +17,9 @@ class Vote extends Model
 
 
     use HasFactory;
+
+    public function topchart(){
+        return $this->hasMany(Topchart::class);
+    }
+
 }

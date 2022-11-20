@@ -61,7 +61,7 @@ Route::get('/vote/action/{vote}', [VoteController::class, 'show'])
 Route::get('/topchart', [TopchartController::class, 'index'])
     ->name('topchart.index');
 Route::get('/topchart/action/{topchart}', [TopchartController::class, 'show'])
-    ->where('topchart', '\d+')
+    ->where(['topchart' => '\d+'])
     ->name('topchart.show');
 
 Route::get('/voting/{id}', [AjaxVotingController::class, 'vote']);

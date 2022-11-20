@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Ajax;
 
+use Ably\Auth;
+use App\Events\topchartCreated;
 use App\Events\VoteClose;
 use App\Http\Controllers\Controller;
 use App\Models\LogActivity;
@@ -10,6 +12,7 @@ use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\DB;
+
 
 class VotingController extends Controller
 {
@@ -46,6 +49,7 @@ class VotingController extends Controller
                                'to_user_id' => $updatedId
                            ]);
                        }
+                       event(new topchartCreated($vote));
                        return response()->json($counter);
                    } else {
                        return response()->json('no');

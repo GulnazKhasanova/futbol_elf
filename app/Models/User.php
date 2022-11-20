@@ -49,4 +49,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(News::class);
     }
+
+     public function topchart(){
+        return $this->hasMany(Topchart::class);
+     }
 }

@@ -18,39 +18,54 @@ class TopchartController extends Controller
             'topchartsList' => $topchart
         ]);
     }
+//    /**
+//     * Show the form for editing the specified resource.
+//     *
+//     * @param Topchart $topchart
+//     * @return void
+//     */
+//    public function create(){
+//    //
+//    }
+//
+//    /**
+//     * Store a newly created resource in storage.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @return \Illuminate\Http\Response
+//     */
+//    public  function store(Request $request){
+//        //
+//    }
+
     /**
      * Show the form for editing the specified resource.
      *
      * @param Topchart $topchart
      * @return void
      */
-    public function create(){
-//        Topchart::create(['id',
-//            'id_gamer' => $voteItem,
-//            'voices' => '',
-//            'id_vote' => $updatedId
-//        ]); //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public  function store(Request $request){
-        //
-    }
     public function show(Topchart $topchart){
-        $id = $topchart->id_vote;
-        $data = DB::table('topchart')
-            ->join('news', 'topchart.id_gamer', '=', 'news.id' )
-            ->whereColumn('topchart.id_vote', '=', $id)
-        ->get();
+
+//        $data = Vote::select(Vote::$availableFields)
+//            ->where(['id' => $topchart])
+//            ->get();
+//        $counter = $data->counter;
+//        $strItem = explode(" ", $counter);
+//        $items =[];
+//        foreach ($strItem as $gamer){
+//            $items[] = DB::table('news')
+//                ->where(['user_id' => $gamer]);
+//        }
+
+//        $data = DB::table('topchart')
+//            ->join('news', 'topchart.id_gamer', '=', 'news.id' )
+//            ->whereColumn('topchart.id_vote', '=', $id)
+//        ->get();
 
         return view('topchart.show',[
-            'topchart' => $topchart,
-            'gamer' => $data
+            'topchart' => $topchart
+//            'gamers' => $item
         ]);
     }
 }
