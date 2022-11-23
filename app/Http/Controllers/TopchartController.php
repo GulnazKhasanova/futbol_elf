@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
-use App\Models\Topchart;
+use App\Models\TopChart;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,31 +41,25 @@ class TopchartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param Topchart $topchart
+     * @param $id
      * @return void
      */
 
-    public function show(Topchart $topchart){
+    public function show($id){
 
-//        $data = Vote::select(Vote::$availableFields)
-//            ->where(['id' => $topchart])
-//            ->get();
-//        $counter = $data->counter;
-//        $strItem = explode(" ", $counter);
-//        $items =[];
-//        foreach ($strItem as $gamer){
-//            $items[] = DB::table('news')
-//                ->where(['user_id' => $gamer]);
-//        }
+        $topChart = TopChart::where('id_vote', '=', $id)
+            ->first();
 
-//        $data = DB::table('topchart')
-//            ->join('news', 'topchart.id_gamer', '=', 'news.id' )
-//            ->whereColumn('topchart.id_vote', '=', $id)
-//        ->get();
+        $data = DB::table('news')
+            ->join('users', 'users.news_id', '=', 'news.id')
+            ->join('top_chart', 'top_chart.id_gamer', '=', 'users.id')
+            ->where('top_chart.id', '=', $topChart->id)
+            ->get();
+
 
         return view('topchart.show',[
-            'topchart' => $topchart
-//            'gamers' => $item
+            'topchart' => $topChart,
+            'gamers' => $data
         ]);
     }
 }

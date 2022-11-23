@@ -51,6 +51,6 @@ class User extends Authenticatable
     }
 
      public function topchart(){
-        return $this->hasMany(Topchart::class);
+        return $this->hasMany(TopChart::class);
      }
 }

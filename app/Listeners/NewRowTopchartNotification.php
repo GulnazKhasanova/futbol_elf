@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Models\Topchart;
+use App\Models\TopChart;
 use App\Events\topchartCreated;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -20,9 +20,9 @@ class NewRowTopchartNotification
     {
         $idVote = $event->vote;
 
-        Topchart::create(['id',
-            'id_gamer' => Auth::user()->id,
-            'voices' => '',
+        TopChart::create(['id',
+            'id_gamer' => auth()->user()->id,
+            'voices' => 0,
             'id_vote' => $idVote->id]);
         //        $event->vote
     }

@@ -7,7 +7,7 @@ use App\Events\topchartCreated;
 use App\Events\VoteClose;
 use App\Http\Controllers\Controller;
 use App\Models\LogActivity;
-use App\Models\Topchart;
+use App\Models\TopChart;
 use App\Models\Vote;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;

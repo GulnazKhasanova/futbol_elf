@@ -28,13 +28,13 @@
     <section class="section about-section gray-bg" id="about">
         <div class="container">
             <div class="row align-items-center flex-row-reverse">
-                <div class="col-lg-6">
+                <div class="col-md-6">
                     <div class="about-text go-to">
                         <h3 class="dark-color">Обо мне</h3>
 {{--                        <h6 class="theme-color lead"> {{$news->role}}</h6>--}}
                         <p>Я <mark>{{$news->firstname}}<mark> {!! $news->lastname !!} вступил в клуб {{$news->enter_club_date}}</p>
                         <div class="row about-list">
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <div class="media">
                                     <label>E-mail</label>
                                     <p>{{Auth::user()->email}}</p>
@@ -43,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-md-6">
                     <div class="about-avatar">
 
                         @if(!$news->image)
@@ -56,7 +56,7 @@
             </div>
         </div>
     </section>
-    <form id="votingform" method="get">
+    <form id="votingform" method="get" class="my-3">
         @csrf
         @method('post')
         <input type="hidden" name="id" id="{{$news->id}}"  >

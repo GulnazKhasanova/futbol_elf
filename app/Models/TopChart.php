@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Topchart extends Model
+class TopChart extends Model
 {
     /**
 
@@ -16,7 +16,7 @@ class Topchart extends Model
      * @var array
 
      */
-    protected  $table= 'topchart';
+    protected  $table = 'top_chart';
     public static  $availableFields= ['id', 'id_gamer', 'voices', 'id_vote', 'created_at' ];
     protected $fillable = [
         'id_gamer',
@@ -26,11 +26,11 @@ class Topchart extends Model
 
     use HasFactory;
 
-    public function vote(){
-        return $this->belongsToMany(Vote::class);
-    }
-
-    public function user(){
-        return $this->belongsToMany(User::class);
-    }
+//    public function vote(){
+//        return $this->belongsToMany(Vote::class);
+//    }
+//
+//    public function user(){
+//        return $this->belongsToMany(User::class);
+//    }
 }
