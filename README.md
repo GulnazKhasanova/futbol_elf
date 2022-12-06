@@ -7,6 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## Pusher
+## Pusher Сокеты
 
 Что бы воти нужно иметь пароль от моего аккаунта в GitHub https://dashboard.pusher.com/
