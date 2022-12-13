@@ -44,7 +44,7 @@ services:
             - 443:443
         volumes:
             - .:/var/www/html
-            - .elf.conf:/etc/nginx/conf.d
+            - .:/etc/nginx/elf.conf
         networks:
             - elf-teamllist
     networks:
