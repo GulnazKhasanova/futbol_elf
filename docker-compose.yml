@@ -45,6 +45,7 @@ services:
         volumes:
             - .:/var/www/html
             - .:/etc/nginx/conf.d
+            #/usr/local/nginx/conf
         networks:
             - elf-teamllist
     networks:
